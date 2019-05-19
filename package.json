@@ -10,10 +10,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/node": "^12.0.2",
+    "@types/ramda": "^0.26.8",
     "fp-ts": "^1.18.1",
     "fp-ts-contrib": "0.0.6",
     "monocle-ts": "^1.7.2",
     "newtype-ts": "^0.2.4",
+    "ramda": "^0.26.1",
     "typescript": "^3.4.5"
   }
 }
