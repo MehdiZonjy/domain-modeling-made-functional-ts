@@ -1,6 +1,6 @@
 import {Newtype, iso} from 'newtype-ts'
 import {Either} from 'fp-ts/lib/Either'
-import {createString} from './constrained-types'
+import {createString} from './constrained-primitives'
 import {fromEither, Option} from 'fp-ts/lib/Option'
 import {compose} from 'fp-ts/lib/function'
 export interface String50 extends Newtype<{readonly String50: unique symbol}, string>{}
