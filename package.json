@@ -1,0 +1,19 @@
+{
+  "name": "domain-modeling-made-functional-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fp-ts": "^1.18.1",
+    "fp-ts-contrib": "0.0.6",
+    "monocle-ts": "^1.7.2",
+    "newtype-ts": "^0.2.4",
+    "typescript": "^3.4.5"
+  }
+}
