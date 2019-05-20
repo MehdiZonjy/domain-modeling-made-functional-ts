@@ -224,9 +224,10 @@ export namespace Price {
   const isoPrice = iso<Price>()
 
   export const createEither = (fieldName: string, val: number): Either<string, Price> => createDecimal(fieldName, isoPrice.wrap, 0, 10000)(val)
+  export const createUnsafe = (val: number): Price => isoPrice.wrap(val)
   export const value: (val: Price) => number = isoPrice.unwrap
 
-  export const multiple = (qty: number, price: Price): Price => isoPrice.modify(R.multiply(qty))(price)
+  export const multiple = (qty: number, price: Price): Either<string, Price> => createEither('Price', value(price) * qty)
 }
 
 export namespace BillingAmount {

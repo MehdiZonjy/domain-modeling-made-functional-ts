@@ -4,6 +4,7 @@ import { Errors, Inputs, Outputs } from "./place-order/types";
 import {TaskEither} from 'fp-ts/lib/TaskEither'
 import { CustomerInfo, Address } from "./compound-types";
 import { Option } from "fp-ts/lib/Option";
+import {Either} from 'fp-ts/lib/Either'
 import { Newtype, iso } from "newtype-ts";
 
 export type CheckProductCodeExists = (_: ProductCode.ProductCode) => boolean
@@ -87,7 +88,7 @@ export interface PricedOrder {
   pricingMethod: PricingMethod
 } 
 
-export type PriceOrder = (_: GetPricingFunction) => (_: ValidatedOrder) => TaskEither<Errors.PricingError, PricedOrder>
+export type PriceOrder = (_: GetPricingFunction) => (_: ValidatedOrder) => Either<Errors.PricingError, PricedOrder>
 
 
 

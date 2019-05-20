@@ -215,7 +215,7 @@ export namespace BillableOrderPlacedDto {
   export const fromDomain = (domain: Outputs.BillableOrderPlaced): BillableOrderPlacedDto => ({
     orderId: OrderId.value(domain.orderId),
     billingAddress: AddressDTO.fromAddress(domain.billingAddress),
-    amountToBill: BillingAmount.value(domain.amounttoBill)
+    amountToBill: BillingAmount.value(domain.amountToBill)
   })
 }
 

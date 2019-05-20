@@ -44,7 +44,7 @@ export namespace Outputs {
   export type BillableOrderPlaced = {
     orderId: OrderId.OrderId
     billingAddress: Address
-    amounttoBill: BillingAmount.BillingAmount
+    amountToBill: BillingAmount.BillingAmount
     _tag: 'bilableOrderPlaced'
   }
 
@@ -101,7 +101,16 @@ export namespace Errors {
 
   export type PlaceOrderError = ValidationError | PricingError |  RemoteServiceError
 
+  export const validationError = (error: string): ValidationError => ({
+    _tag: 'validationError',
+    error
+  })
+
+  export const pricingError = (error: string): PricingError => ({
+    _tag:'pricingError',
+    error
+  })
 }
 
 
-export type PlaceOrder = (order: Inputs.UnvalidatedOrder) => TaskEither<Errors.PlaceOrderError, Outputs.PlaceOrderEvent>
+export type PlaceOrder = (order: Inputs.UnvalidatedOrder) => TaskEither<Errors.PlaceOrderError, Outputs.PlaceOrderEvent[]>
