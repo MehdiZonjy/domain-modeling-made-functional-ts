@@ -207,7 +207,7 @@ const categorieShippingAddress = (address: Address): AddressCategory => {
 }
 
 
-const calculateShippingCost: CalculateShippingCost = (pricedOrder: PricedOrder): Price.Price => {
+export const calculateShippingCost: CalculateShippingCost = (pricedOrder: PricedOrder): Price.Price => {
   switch (categorieShippingAddress(pricedOrder.shippingAddress)) {
     case AddressCategory.International: return Price.createUnsafe(20.0)
     case AddressCategory.UsLocalState: return Price.createUnsafe(5.0)
@@ -318,7 +318,7 @@ const createEvents: CreateEvents = (pricedOrder: PricedOrder) => (ackEvent: Opti
   ]
 }
 
-const placeOrder = (checkProductExits: CheckProductCodeExists) => (checkAddressExists: CheckAddressExists) => (getProductPrice: GetPricingFunction) => (calculateShippingCost: CalculateShippingCost) => (createOrderAckLetter: CreateOrderAcknowledgmentLetter) => (sendOrderAckLetter: SendOrderAcknowledgment): PlaceOrder => (unvalidatedOrder: Inputs.UnvalidatedOrder): TaskEither<Errors.PlaceOrderError, Outputs.PlaceOrderEvent[]> => {
+export const placeOrder = (checkProductExits: CheckProductCodeExists) => (checkAddressExists: CheckAddressExists) => (getProductPrice: GetPricingFunction) => (calculateShippingCost: CalculateShippingCost) => (createOrderAckLetter: CreateOrderAcknowledgmentLetter) => (sendOrderAckLetter: SendOrderAcknowledgment): PlaceOrder => (unvalidatedOrder: Inputs.UnvalidatedOrder): TaskEither<Errors.PlaceOrderError, Outputs.PlaceOrderEvent[]> => {
   return Do(taskEither)
     .bindL('validatedOrder', () => validateOrder(checkProductExits)(checkAddressExists)(unvalidatedOrder).mapLeft(e => e as Errors.PlaceOrderError))
     .bindL('pricedOrder', ({ validatedOrder }) => taskEither.fromEither(priceOrder(getProductPrice)(validatedOrder)))

@@ -22,9 +22,9 @@ export namespace EmailAddress {
 
   const isoEmailAddress = iso<EmailAddress>()
 
-  const emailPattern = /.+@.+/g
+  const emailPattern = /.+@.+/
 
-  export const createEither = (fieldName: string, str: string | undefined): Either<string, EmailAddress> => createLike(fieldName, isoEmailAddress.wrap, emailPattern)(str)
+  export const createEither = (fieldName: string, str: string | undefined): Either<string, EmailAddress> =>  createLike(fieldName, isoEmailAddress.wrap, emailPattern)(str)
   export const createOption = (fieldName: string, str: string | undefined): Option<EmailAddress> => compose(fromEither, createLike(fieldName, isoEmailAddress.wrap, emailPattern))(str)
   export const value: (str: EmailAddress) => string = isoEmailAddress.unwrap
 }
@@ -35,7 +35,7 @@ export namespace USStateCode {
   const isoUsStateCode = iso<UsStateCode>()
 
 
-  const usStateCodePattern = /^(A[KLRZ]|C[AOT]|D[CE]|FL|GA|HI|I[ADLN]|K[SY]|LA|M[ADEINOST]|N[CDEHJMVY]|O[HKR]|P[AR]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY])$/g
+  const usStateCodePattern = /^(A[KLRZ]|C[AOT]|D[CE]|FL|GA|HI|I[ADLN]|K[SY]|LA|M[ADEINOST]|N[CDEHJMVY]|O[HKR]|P[AR]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY])$/
 
   export const createEither = (fieldName: string, str: string | undefined): Either<string, UsStateCode> => createLike(fieldName, isoUsStateCode.wrap, usStateCodePattern)(str)
   export const createOption = (fieldName: string, str: string | undefined): Option<UsStateCode> => compose(fromEither, createLike(fieldName, isoUsStateCode.wrap, usStateCodePattern))(str)
@@ -80,7 +80,7 @@ export namespace ZipCode {
   const isoZipCode = iso<ZipCode>()
 
 
-  const zipCodePattern = /\d{5}/g
+  const zipCodePattern = /\d{5}/
 
   export const createEither = (fieldName: string, str: string | undefined): Either<string, ZipCode> => createLike(fieldName, isoZipCode.wrap, zipCodePattern)(str)
   export const createOption = (fieldName: string, str: string | undefined): Option<ZipCode> => compose(fromEither, createLike(fieldName, isoZipCode.wrap, zipCodePattern))(str)
@@ -111,7 +111,7 @@ export namespace WidgetCode {
   const isoWidgetCode = iso<WidgetCode>()
 
 
-  const widgetCodePattern = /W\d{4}/g
+  const widgetCodePattern = /W\d{4}/
 
   export const createEither = (fieldName: string, str: string | undefined): Either<string, WidgetCode> => createLike(fieldName, isoWidgetCode.wrap, widgetCodePattern)(str)
   export const createOption = (fieldName: string, str: string | undefined): Option<WidgetCode> => compose(fromEither, createLike(fieldName, isoWidgetCode.wrap, widgetCodePattern))(str)
@@ -124,7 +124,7 @@ export namespace GizmoCode {
   const isoGizmoCode = iso<GizmoCode>()
 
 
-  const gizmoCodePattern = /G\d{3}/g
+  const gizmoCodePattern = /G\d{3}/
 
   export const createEither = (fieldName: string, str: string | undefined): Either<string, GizmoCode> => createLike(fieldName, isoGizmoCode.wrap, gizmoCodePattern)(str)
   export const createOption = (fieldName: string, str: string | undefined): Option<GizmoCode> => compose(fromEither, createLike(fieldName, isoGizmoCode.wrap, gizmoCodePattern))(str)

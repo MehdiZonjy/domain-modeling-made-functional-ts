@@ -44,8 +44,8 @@ export const createLike: CreateConstrainedLike = <T>(fieldName: string, costr: C
   }
 
   
-  if(pattern.test(val)) {
-    return left(`${fieldName} does not match pattern ${pattern}`)
+  if(!pattern.test(val)) {
+    return left(`${fieldName} does not match pattern ${pattern} ${val}`)
   }
   return right(costr(val))
 }
