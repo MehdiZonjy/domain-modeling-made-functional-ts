@@ -1,6 +1,6 @@
 import { Newtype, iso } from 'newtype-ts'
 import { Either, left, right } from 'fp-ts/lib/Either'
-import { createString, createLike, isUndefined, isEmptyOrUndefined, createInt, createDecimal } from './constrained-primitives'
+import { createString, createLike, isUndefined, isEmptyOrUndefined, createInt, createDecimal, createOptionalString } from './constrained-primitives'
 import { fromEither, Option } from 'fp-ts/lib/Option'
 import { compose } from 'fp-ts/lib/function'
 import * as R from 'ramda'
@@ -13,7 +13,7 @@ export namespace String50 {
 
 
   export const createEither = (fieldName: string, str: string | undefined): Either<string, String50> => createString(fieldName, isoString50.wrap, 50)(str)
-  export const createOption = (fieldName: string, str: string | undefined): Option<String50> => compose(fromEither, createString(fieldName, isoString50.wrap, 50))(str)
+  export const createOption = (fieldName: string, str: string | undefined): Either<string, Option<String50>> => createOptionalString(fieldName, isoString50.wrap, 50)(str)
   export const value: (str: String50) => string = isoString50.unwrap
 }
 

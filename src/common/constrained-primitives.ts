@@ -1,8 +1,10 @@
 import {Either, left, right} from 'fp-ts/lib/Either'
-import {Curried4} from 'fp-ts/lib/function'
+import {Option, some, none} from 'fp-ts/lib/Option'
 type Constructor<T,U> = (t:T) => U
 
 type CreateConstrainedString = <T>(fieldName: string, costr: Constructor<string, T>, max: number) => (val: string | undefined) => Either<string, T>
+type CreateConstrainedOptionalString = <T>(fieldName: string, costr: Constructor<string, T>, max: number) => (val: string | undefined) => Either<string, Option<T>>
+
 type CreateConstrainedLike = <T>(fieldName: string, costr: Constructor<string, T>, pattern: RegExp) => (val: string | undefined) => Either<string, T>
 type CreateConstrainedInt = <T>(fieldName: string, ctor: Constructor<number, T>, min: number, max: number) => (val: number | undefined) => Either<string, T>
 type CreateConstrainedDecimal = <T>(fieldName: string, ctor: Constructor<number, T>, min: number, max: number) => (val: number | undefined) => Either<string, T>
@@ -24,6 +26,17 @@ export const createString: CreateConstrainedString = <T>(fieldName: string, cost
   return right(costr(val))
 }
 
+export const createOptionalString: CreateConstrainedOptionalString = <T>(fieldName: string, costr: Constructor<string,T>, max: number) => (val: string | undefined): Either<string, Option<T>> => {
+  if(isEmptyOrUndefined(val)){
+    return right(none)
+  }
+
+  if(val.length > max) {
+    return left(`${fieldName} must be less than ${max}`)
+  }
+
+  return right(some(costr(val)))
+}
 
 export const createLike: CreateConstrainedLike = <T>(fieldName: string, costr: Constructor<string,T>, pattern: RegExp) => (val: string | undefined): Either<string, T> => {
   if(isEmptyOrUndefined(val)) {
